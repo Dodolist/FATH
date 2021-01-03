@@ -31,4 +31,35 @@ print(vowel_arr)
 
 print(consonant_arr)
 
+
+i=0
+
+while i<length2:
+    if consonant_arr[i]==0:
+        i+=1
         
+    elif consonant_arr[i]==1:
+        consonant_arr.insert(i+1,5)
+        i+=1
+        
+    elif consonant_arr[i]==2:
+       if consonant_arr[i+1]==2:
+          if consonant_arr[i+2]==2:
+              consonant_arr.insert(i+2,5)
+              i+=2
+            
+            elif consonant_arr[i+2]==1:
+                consonant_arr.insert(i+3,5)
+                i+=3
+                
+    elif consonant_arr[i]==3:
+        consonant_arr.insert(i-1,5)
+        i+=1
+
+    input_length2=len(consonant_arr)
+    
+
+print(consonant_arr)
+
+            
+    
