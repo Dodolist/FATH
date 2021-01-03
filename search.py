@@ -14,4 +14,21 @@ for i in range(input_length):
         vowel_arr[i] = 1
     pass
 
+for i in range(input_length):
+    if vowel_arr[i] == 1:
+        if i==input_length-1:
+            consonant_arr[i-1] += 1
+            consonant_arr[i] = 0
+            pass
+        else:
+            consonant_arr[i-1] += 1
+            consonant_arr[i+1] += 1
+            consonant_arr[i] = 0
+    elif search[i] == ' ':
+        consonant_arr[i] = 4
+
 print(vowel_arr)
+
+print(consonant_arr)
+
+        
