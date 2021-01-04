@@ -1,3 +1,5 @@
+from JamoSplit import jamo_split, jamo_combine
+
 vowelAlphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O']
 
 search = input("검색창: ")
@@ -18,14 +20,16 @@ for i in range(input_length):
     if vowel_arr[i] == 1:
         if i==input_length-1:
             consonant_arr[i-1] += 1
-            consonant_arr[i] = 0
             pass
         else:
             consonant_arr[i-1] += 1
             consonant_arr[i+1] += 1
-            consonant_arr[i] = 0
     elif search[i] == ' ':
         consonant_arr[i] = 4
+
+for i in range(input_length):
+    if vowel_arr[i] == 1:
+        consonant_arr[i] = 0
 
 print(vowel_arr)
 print(consonant_arr)
@@ -89,7 +93,10 @@ while i<input_length2:
         else:
             consonant_arr.insert(i+2,5)
             i+=3
-
+    elif consonant_arr[i] == 0:
+        consonant_arr.insert(i+1,5)
+        i+=2
+        pass
     input_length2=len(consonant_arr)
 
     print(consonant_arr)
@@ -162,12 +169,21 @@ for i in range(input_length):
 
 
 input_length4=len(vowelAlphabet)
+
 for i in range(input_length):
     for k in range(input_length4):
         if search[i]==vowelAlphabet[k]:
             search=search.replace(search[i],vowelKorean[k])
             pass
 
-print(search)
+search=list(search)
 
+for i in range(input_length2):
+    if consonant_arr[i] == 5:   
+        search.insert(i,'_')
+
+
+
+print(search)
+print(jamo_combine(search))
 
