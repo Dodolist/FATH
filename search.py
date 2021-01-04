@@ -37,6 +37,27 @@ print(consonant_arr)
 i=0
 input_length2=len(consonant_arr)
 
+double_vowel_hangul={'ㅘ','ㅙ','ㅚ','ㅞ','ㅝ','ㅟ','ㅢ'}
+double_vowel_alphabet={'hk','ho','hl','np','nj','nl','ml'}
+length5=len(double_vowel_alphabet)
+
+def search_double_vowel(j):
+    for k in range(length5):
+        if search[k] == 'h':
+            if search[k+1]=='k'or search[k+1]== 'o' or search[k+1]== 'l':
+                del consonant_arr[j]
+                pass
+            
+        elif search[k] == 'n':
+            if search[k+1] == 'p' or search[k+1]=='j'or search[k+1]=='l':
+                del consonant_arr[j]
+                pass
+
+        elif search[k] == 'm':
+            if search[k+1]== 'l':
+                del consonant_arr[j]
+                pass
+
 while i<input_length2:
     if consonant_arr[i] == 2:
         if i+2 != input_length2:
@@ -94,14 +115,15 @@ while i<input_length2:
             consonant_arr.insert(i+2,5)
             i+=3
     elif consonant_arr[i] == 0:
+        if consonant_arr[i+1]==0:
+            search_double_vowel(i)
+            
         consonant_arr.insert(i+1,5)
         i+=2
         pass
     input_length2=len(consonant_arr)
 
     print(consonant_arr)
-
-
 
 
 
