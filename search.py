@@ -2,26 +2,42 @@ from JamoSplit import jamo_split, jamo_combine
 
 
 
-            
-vowelAlphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O']
+consonant_Korean = ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㄲ','ㄸ','ㅉ','ㅃ','ㅆ']
+consonant_Alphabet=['r','s','e','f','a','q','t','d','w','c','z','x','v','g','R','E','W','Q','T']
+vowel_Korean=['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅔ','ㅐ','ㅖ','ㅒ','ㅘ','ㅙ','ㅚ','ㅞ','ㅝ','ㅟ','ㅢ']
+vowel_Alphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O','hk','ho','hl','np','nj','nl','ml']
 
-search = input("검색창: ")
+search = input("입력: ")
+search=list(search)
+#print('출력: '+search)
+search_length = len(search)
 
-print('출력: '+search)
+vowel_arr = [0 for i in range(search_length)]
+consonant_arr = [1 for i in range(search_length)]
 
-input_length = len(search)
 
-vowel_arr = [0 for i in range(input_length)]
-consonant_arr = [1 for i in range(input_length)]
+consonant_arr_length=len(consonant_arr)
 
-for i in range(input_length):
-    if search[i] in vowelAlphabet:
+'''
+
+in vowel_arr, 모음 자리에 1 대입
+
+'''
+
+for i in range(search_length):
+    if search[i] in vowel_Alphabet:
         vowel_arr[i] = 1
     pass
 
-for i in range(input_length):
+'''
+
+in consonant_arr, 모음 기준으로 앞뒤에 +1, 띄어쓰기는 4 대입
+
+'''
+
+for i in range(search_length):
     if vowel_arr[i] == 1:
-        if i==input_length-1:
+        if i==search_length-1:
             consonant_arr[i-1] += 1
             pass
         else:
@@ -30,46 +46,80 @@ for i in range(input_length):
     elif search[i] == ' ':
         consonant_arr[i] = 4
 
-for i in range(input_length):
+'''
+
+in consonant_arr, 모음 자리에 0 대입
+
+'''
+
+for i in range(search_length):
     if vowel_arr[i] == 1:
         consonant_arr[i] = 0
 
-print(vowel_arr)
-print(consonant_arr)
+'''
 
-i=0
-input_length2=len(consonant_arr)
+이중모음 확인
+in consonant_arr, 
 
-double_vowel_hangul=['ㅘ','ㅙ','ㅚ','ㅞ','ㅝ','ㅟ','ㅢ']
-double_vowel_alphabet=['hk','ho','hl','np','nj','nl','ml']
-length5=len(double_vowel_alphabet)
+'''
 
-for k in range(input_length-1, 0, -1):
+for k in range(search_length-1, -1, -1):
     if search[k] == 'h':
-        if search[k+1]=='k'or search[k+1]== 'o' or search[k+1]== 'l':
+        if search[k+1] == 'k':
+            search[k]='hk'
+            del search[k+1]
+            del consonant_arr[k]
+            pass
+        elif search[k+1] == 'o':
+            search[k]='ho'
+            del search[k+1]
+            del consonant_arr[k]
+            pass
+        elif search[k+1] == 'l':
+            search[k]='hl'
+            del search[k+1]
             del consonant_arr[k]
             pass
     elif search[k] == 'n':
-        if search[k+1] == 'p' or search[k+1]=='j'or search[k+1]=='l':
+        if search[k+1] == 'p':
+            search[k]='np'
+            del search[k+1]
+            del consonant_arr[k]
+            pass
+        elif search[k+1] == 'j':
+            search[k]='nj'
+            del search[k+1]
+            del consonant_arr[k]
+            pass
+        elif search[k+1] == 'l':
+            search[k]='nl'
+            del search[k+1]
             del consonant_arr[k]
             pass
     elif search[k] == 'm':
-        if search[k+1]== 'l':
+        if search[k+1] == 'l':
+            search[k]='ml'
+            del search[k+1]
             del consonant_arr[k]
+            search[k]
             pass
 
-print(consonant_arr)
 
-input_length2=len(consonant_arr)
+'''
 
-while i<input_length2:
+in consonant_arr, 글자 끊어지는 부분마다 5 대입
+
+'''
+
+i=0
+consonant_arr_length=len(consonant_arr)
+search_length = len(search)
+
+while i < consonant_arr_length:
     if consonant_arr[i] == 2:
-        if i+2 != input_length2:
-            if consonant_arr[i+2] == 0:
-                consonant_arr.insert(i+3,5)
-                i+=3
-            elif consonant_arr[i+2] == 2:
-                if i+3 != input_length2:
+        if i+2 != consonant_arr_length:
+            if consonant_arr[i+2] == 2:
+                if i+3 != consonant_arr_length:
                     if consonant_arr[i+3] == 1:
                         #consonant_arr.insert(i+4,5)
                         i+=4
@@ -101,11 +151,10 @@ while i<input_length2:
         else:
             consonant_arr.insert(i+2,5)
             i+=3
-            
     elif consonant_arr[i] == 3:
-        if i+2 != input_length2:
+        if i+2 != consonant_arr_length:
             if consonant_arr[i+2] == 2:
-                if i+3 != input_length2:
+                if i+3 != consonant_arr_length:
                     if consonant_arr[i+3] == 1:
                         #consonant_arr.insert(i+4,5)
                         i+=4
@@ -144,81 +193,59 @@ while i<input_length2:
         pass
     else:
         i+=1
-    input_length2=len(consonant_arr)
+        
+    consonant_arr_length=len(consonant_arr)
 
     print(consonant_arr)
+    print(consonant_arr_length)
     print(i)
-    print(input_length2)
 
 
+'''
 
+자음 바꾸기
 
-
-q='ㅂ'
-w='ㅈ'
-e='ㄷ'
-r='ㄱ'
-t='ㅅ'
-y='ㅛ'
-u='ㅕ'
-i='ㅑ'
-o='ㅐ'
-p='ㅔ'
-
-a='ㅁ'
-s='ㄴ'
-d='ㅇ'
-f='ㄹ'
-g='ㅎ'
-h='ㅗ'
-j='ㅓ'
-k='ㅏ'
-l='ㅣ'
-z='ㅋ'
-x='ㅌ'
-c='ㅊ'
-v='ㅍ'
-b='ㅠ'
-n='ㅜ'
-m='ㅡ'
-
-consonantKorean = ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㄲ','ㄸ','ㅉ','ㅃ','ㅆ']
-consonantAlphabet=['r','s','e','f','a','q','t','d','w','c','z','x','v','g','R','E','W','Q','T']
-
-
-vowelKorean=['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅔ','ㅐ','ㅖ','ㅒ']
-vowelAlphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O']
-
-
-
-input_length3=len(consonantAlphabet)
-
-
-#자음 바꾸기
-for i in range(input_length):
-     for k in range(input_length3):
-        if search[i]==consonantAlphabet[k]:
-            search=search.replace(search[i],consonantKorean[k])
+'''
+for i in range(search_length):
+     for k in range(len(consonant_Alphabet)):
+        if search[i]==consonant_Alphabet[k]:
+            search[i] = consonant_Korean[k]
+            #search=search.replace(search[i],consonant_Korean[k])
             pass
 
 
-input_length4=len(vowelAlphabet)
 
-#모음 바꾸기 
-for i in range(input_length):
-    for k in range(input_length4):
-        if search[i]==vowelAlphabet[k]:
-            search=search.replace(search[i],vowelKorean[k])
+'''
+
+모음 바꾸기 
+
+'''
+for i in range(search_length):
+    for k in range(len(vowel_Alphabet)):
+        if search[i]==vowel_Alphabet[k]:
+            search[i] = vowel_Korean[k]
+            #search=search.replace(search[i],vowel_Korean[k])
             pass
 
-search=list(search)
+'''
 
-for i in range(input_length2):
-    if consonant_arr[i] == 5:   
+underbar 추가
+
+'''
+
+
+
+for i in range(consonant_arr_length):
+    if consonant_arr[i] == 5:
         search.insert(i,'_')
 
 
+'''
 
+print
+
+
+'''
 print(search)
 print(jamo_combine(search))
 
