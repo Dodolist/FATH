@@ -27,7 +27,7 @@ in consonant_arr,
 
 '''
 
-for k in range(search_length-1, -1, -1):
+for k in range(search_length-2, -1, -1):
     if search[k] == 'h':
         if search[k+1] == 'k':
             search[k]='hk'
