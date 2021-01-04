@@ -28,40 +28,68 @@ for i in range(input_length):
         consonant_arr[i] = 4
 
 print(vowel_arr)
-
 print(consonant_arr)
 
 i=0
 input_length2=len(consonant_arr)
 
 while i<input_length2:
-    if consonant_arr[i]==0:
-        i+=1
-        
-    elif consonant_arr[i]==1:
-        consonant_arr.insert(i+1,5)
-        i+=1
-        
-    elif consonant_arr[i]==2:
-        if consonant_arr[i+1]==2:
-
-            if consonant_arr[i+2]==2:
-              consonant_arr.insert(i+2,5)
-              i+=1
-
-            elif consonant_arr[i+2]==1:
-                consonant_arr.insert(i+3,5)
-                i+=2
-        i+=1
-                
-    elif consonant_arr[i]==3:
-        consonant_arr.insert(i,5)
-        i+=2
+    if consonant_arr[i] == 2:
+        if i+2 != input_length2:
+            if consonant_arr[i+2] == 2:
+                if i+3 != input_length2:
+                    if consonant_arr[i+3] == 1:
+                        consonant_arr.insert(i+4,5)
+                        i+=5
+                        pass
+                    elif consonant_arr[i+3] == 2:
+                        consonant_arr.insert(i+3,5)
+                        i+=4
+                        pass
+                    elif consonant_arr[i+3] == 3:
+                        consonant_arr.insert(i+3,5)
+                        i+=4
+                        pass
+                    pass
+                else:
+                    consonant_arr.insert(i+3,5)
+                    i+=4
+                    pass
+            elif consonant_arr[i+2] == 3:
+                consonant_arr.insert(i+2,5)
+                i+=3
+                pass
+        else:
+            consonant_arr.insert(i+2,5)
+            i+=3
+            
+    elif consonant_arr[i] == 3:
+        if i+2 != input_length2:
+            if consonant_arr[i+2] == 2:
+                if i+3 != input_length2:
+                    if consonant_arr[i+3] == 1:
+                        consonant_arr.insert(i+4,5)
+                        i+=5
+                        pass
+                    elif consonant_arr[i+3] == 2:
+                        consonant_arr.insert(i+3,5)
+                        i+=4
+                    elif consonant_arr[i+3] == 3:
+                        consonant_arr.insert(i+3,5)
+                        i+=4
+                        pass
+                else:
+                    consonant_arr.insert(i+3,5)
+                    i+=4
+                    pass
+            elif consonant_arr[i+2] == 3:
+                consonant_arr.insert(i+2,5)
+                i+=3
+                pass
+        else:
+            consonant_arr.insert(i+2,5)
+            i+=3
 
     input_length2=len(consonant_arr)
-    
 
-print(consonant_arr)
-
-            
-    
+    print(consonant_arr)
