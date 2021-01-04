@@ -2,8 +2,8 @@ from JamoSplit import jamo_split, jamo_combine
 
 
 
-consonant_Korean = ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㄲ','ㄸ','ㅉ','ㅃ','ㅆ']
-consonant_Alphabet=['r','s','e','f','a','q','t','d','w','c','z','x','v','g','R','E','W','Q','T']
+consonant_Korean = ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㄲ','ㄸ','ㅉ','ㅃ','ㅆ','ㄳ','ㄵ','ㄶ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅄ']
+consonant_Alphabet=['r','s','e','f','a','q','t','d','w','c','z','x','v','g','R','E','W','Q','T','rt','sw','sg','fr','fa','fq','ft','fx','fv','fg','qt']
 vowel_Korean=['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅔ','ㅐ','ㅖ','ㅒ','ㅘ','ㅙ','ㅚ','ㅞ','ㅝ','ㅟ','ㅢ']
 vowel_Alphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O','hk','ho','hl','np','nj','nl','ml']
 
@@ -18,43 +18,7 @@ consonant_arr = [1 for i in range(search_length)]
 
 consonant_arr_length=len(consonant_arr)
 
-'''
 
-in vowel_arr, 모음 자리에 1 대입
-
-'''
-
-for i in range(search_length):
-    if search[i] in vowel_Alphabet:
-        vowel_arr[i] = 1
-    pass
-
-'''
-
-in consonant_arr, 모음 기준으로 앞뒤에 +1, 띄어쓰기는 4 대입
-
-'''
-
-for i in range(search_length):
-    if vowel_arr[i] == 1:
-        if i==search_length-1:
-            consonant_arr[i-1] += 1
-            pass
-        else:
-            consonant_arr[i-1] += 1
-            consonant_arr[i+1] += 1
-    elif search[i] == ' ':
-        consonant_arr[i] = 4
-
-'''
-
-in consonant_arr, 모음 자리에 0 대입
-
-'''
-
-for i in range(search_length):
-    if vowel_arr[i] == 1:
-        consonant_arr[i] = 0
 
 '''
 
@@ -104,6 +68,229 @@ for k in range(search_length-1, -1, -1):
             search[k]
             pass
 
+'''
+
+in vowel_arr, 모음 자리에 1 대입
+
+'''
+search_length = len(search)
+for i in range(search_length):
+    if search[i] in vowel_Alphabet:
+        vowel_arr[i] = 1
+    pass
+
+
+
+'''
+
+이중받침 확인
+in consonant_arr, 
+
+'''
+
+search_length = len(search)
+
+k=0
+while k<search_length-1:
+    if k+2 == search_length:
+        if search[k] == 'r':
+            if search[k+1] == 't':
+                search[k]='rt'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+            
+        elif search[k] == 's':
+            if search[k+1] == 'w':
+                search[k]='sw'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+            
+            elif search[k+1] == 'g' :
+                search[k]='sg'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+            
+        elif search[k] == 'q' :
+            if search[k+1] == 't':
+                search[k]='qt'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+
+        elif search[k] == 'f':
+            if search[k+1] == 'r':
+                search[k]='fr'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+            
+            elif search[k+1] == 'a' :
+                search[k]='fa'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+            
+            elif search[k+1] == 'q':
+                search[k]='fq'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+            
+            elif search[k+1] == 't' :
+                search[k]='ft'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+
+            elif search[k+1] == 'x' :
+                search[k]='fx'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass        
+
+            elif search[k+1] == 'v' :
+                search[k]='fv'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+
+            elif search[k+1] == 'g' :
+                search[k]='fg'
+                del search[k+1]
+                del consonant_arr[k]
+                del vowel_arr[k]
+                pass
+
+    else:
+        if vowel_arr[k+2] != 1:
+            if search[k] == 'r':
+                if search[k+1] == 't':
+                    search[k]='rt'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+                
+            elif search[k] == 's':
+                if search[k+1] == 'w':
+                    search[k]='sw'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+                
+                elif search[k+1] == 'g' :
+                    search[k]='sg'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+                
+            elif search[k] == 'q' :
+                if search[k+1] == 't':
+                    search[k]='qt'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+
+            elif search[k] == 'f':
+                if search[k+1] == 'r':
+                    search[k]='fr'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+                
+                elif search[k+1] == 'a' :
+                    search[k]='fa'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+                
+                elif search[k+1] == 'q':
+                    search[k]='fq'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+                
+                elif search[k+1] == 't' :
+                    search[k]='ft'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+
+                elif search[k+1] == 'x' :
+                    search[k]='fx'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass        
+
+                elif search[k+1] == 'v' :
+                    search[k]='fv'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+
+                elif search[k+1] == 'g' :
+                    search[k]='fg'
+                    del search[k+1]
+                    del consonant_arr[k]
+                    del vowel_arr[k]
+                    pass
+
+    k+=1
+    search_length = len(search)
+
+
+search_length = len(search)
+
+
+'''
+
+in consonant_arr, 모음 기준으로 앞뒤에 +1, 띄어쓰기는 4 대입
+
+'''
+
+for i in range(search_length):
+    if vowel_arr[i] == 1:
+        if i==search_length-1:
+            consonant_arr[i-1] += 1
+            pass
+        else:
+            consonant_arr[i-1] += 1
+            consonant_arr[i+1] += 1
+    elif search[i] == ' ':
+        consonant_arr[i] = 4
+
+'''
+
+in consonant_arr, 모음 자리에 0 대입
+
+'''
+
+for i in range(search_length):
+    if vowel_arr[i] == 1:
+        consonant_arr[i] = 0
+
 
 '''
 
@@ -120,11 +307,11 @@ while i < consonant_arr_length:
         if i+2 != consonant_arr_length:
             if consonant_arr[i+2] == 2:
                 if i+3 != consonant_arr_length:
-                    if consonant_arr[i+3] == 1:
-                        #consonant_arr.insert(i+4,5)
-                        i+=4
-                        pass
-                    elif consonant_arr[i+3] == 2:
+##                    if consonant_arr[i+3] == 1:
+##                        #consonant_arr.insert(i+4,5)
+##                        i+=4
+##                        pass
+                    if consonant_arr[i+3] == 2:
                         #consonant_arr.insert(i+3,5)
                         i+=3
                         pass
@@ -155,11 +342,11 @@ while i < consonant_arr_length:
         if i+2 != consonant_arr_length:
             if consonant_arr[i+2] == 2:
                 if i+3 != consonant_arr_length:
-                    if consonant_arr[i+3] == 1:
-                        #consonant_arr.insert(i+4,5)
-                        i+=4
-                        pass
-                    elif consonant_arr[i+3] == 2:
+##                    if consonant_arr[i+3] == 1:
+##                        #consonant_arr.insert(i+4,5)
+##                        i+=4
+##                        pass
+                    if consonant_arr[i+3] == 2:
                         #consonant_arr.insert(i+3,5)
                         i+=3
                     elif consonant_arr[i+3] == 3:
@@ -196,9 +383,9 @@ while i < consonant_arr_length:
         
     consonant_arr_length=len(consonant_arr)
 
-    print(consonant_arr)
-    print(consonant_arr_length)
-    print(i)
+##    print(consonant_arr)
+##    print(consonant_arr_length)
+##    print(i)
 
 
 '''
@@ -246,6 +433,6 @@ print
 
 
 '''
-print(search)
+
 print(jamo_combine(search))
 
