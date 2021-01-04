@@ -113,11 +113,6 @@ while i<input_length2:
 
 
 
-
-
-
-
-
 q='ㅂ'
 w='ㅈ'
 e='ㄷ'
@@ -166,6 +161,13 @@ for i in range(input_length):
             pass
 
 
+input_length4=len(vowelAlphabet)
+for i in range(input_length):
+    for k in range(input_length4):
+        if search[i]==vowelAlphabet[k]:
+            search=search.replace(search[i],vowelKorean[k])
+            pass
+
 print(search)
-     
+
 

@@ -40,7 +40,6 @@ i=0
 k=0
 input_length3=len(consonantAlphabet)
 
-input_length=len(search)
 
 for i in range(input_length):
      for k in range(input_length3):
