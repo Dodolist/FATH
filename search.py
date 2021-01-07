@@ -1,14 +1,30 @@
 from JamoSplit import jamo_split, jamo_combine
 
 
-
 consonant_Korean = ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㄲ','ㄸ','ㅉ','ㅃ','ㅆ','ㄳ','ㄵ','ㄶ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅄ']
 consonant_Alphabet=['r','s','e','f','a','q','t','d','w','c','z','x','v','g','R','E','W','Q','T','rt','sw','sg','fr','fa','fq','ft','fx','fv','fg','qt']
 vowel_Korean=['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅔ','ㅐ','ㅖ','ㅒ','ㅘ','ㅙ','ㅚ','ㅞ','ㅝ','ㅟ','ㅢ']
 vowel_Alphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O','hk','ho','hl','np','nj','nl','ml']
 
 search = input("입력: ")
+
+finds=list(search)
+#한글일까 영어일까
+
+for i in range(0,len(finds)-1, 1):
+    
+    if finds[i] in consonant_Alphabet or finds[i] in vowel_Alphabet:
+        print("영어에서 한글로 전환합니다.")
+        m=0
+        break
+    else :
+        print("한글에서 영어로 전환합니다.")
+        m=1
+        break
+
 search=list(search)
+
+
 #print('출력: '+search)
 search_length = len(search)
 
@@ -19,7 +35,7 @@ consonant_arr = [1 for i in range(search_length)]
 consonant_arr_length=len(consonant_arr)
 
 
-
+    
 '''
 
 이중모음 확인
@@ -426,7 +442,6 @@ for i in range(consonant_arr_length):
     if consonant_arr[i] == 5:
         search.insert(i,'_')
 
-
 '''
 
 print
@@ -435,4 +450,6 @@ print
 '''
 
 print(jamo_combine(search))
+
+
 
