@@ -41,9 +41,9 @@ for i in range(len(finds)):
 Delete Underbar
 '''
 
-for i in range(len(finds)) :
-    if finds[i] == '_' :
-        finds[i] = ''
+for i in finds :
+    if i == '_' :
+        finds.remove('_')
         pass
 
 '''
