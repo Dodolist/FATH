@@ -14,8 +14,9 @@ vowel_Alphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O','hk','ho
 
 search=input('입력:')
 finds=list(search)
-finds=jamo_split(finds)
-finds=list(finds)
+finds=list(jamo_split(finds))
+
+
 
 '''
 자음 바꾸기

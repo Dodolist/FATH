@@ -72,11 +72,39 @@ for k in range(search_length-2, -1, -1):
             search[k]
             pass
 
+print(search)
+'''
+한글인지 아닌지?
+'''
+
+str_consonant_Alphabet = str(consonant_Alphabet)
+str_vowel_Alphabet = str(vowel_Alphabet)
+
+if len(search) > 6:
+    for i in range(0,6,1):
+        if str_consonant_Alphabet.find(search[i]) != -1 and str_consonant_Alphabet.find(search[i+1]) != -1:
+            print("영어로 검색합니다.")
+            break
+        elif str_vowel_Alphabet.find(search[i]) != -1 and str_vowel_Alphabet.find(search[i+1]) != -1:
+            print("영어로 검색합니다.")
+            break
+else :
+    for i in range(0,len(search)-1,1):
+        if str_consonant_Alphabet.find(search[i]) != -1 and str_consonant_Alphabet.find(search[i+1]) != -1:
+            print("영어로 검색합니다.")
+            break
+        elif str_vowel_Alphabet.find(search[i]) != -1 and str_vowel_Alphabet.find(search[i+1]) != -1:
+            print("영어로 검색합니다.")
+            break
+
+          
+
 '''
 
 in vowel_arr, 모음 자리에 1 대입
 
 '''
+
 search_length = len(search)
 for i in range(search_length):
     if search[i] in vowel_Alphabet:
@@ -91,8 +119,6 @@ for i in range(search_length):
 in consonant_arr, 
 
 '''
-
-search_length = len(search)
 
 k=0
 while k<search_length-1:
@@ -424,17 +450,13 @@ underbar 추가
 
 '''
 
-
-
 for i in range(consonant_arr_length):
     if consonant_arr[i] == 5:
         search.insert(i,'_')
 
 
 '''
-
 print
-
 
 '''
 
