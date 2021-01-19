@@ -12,45 +12,42 @@ consonant_Alphabet=['r','s','e','f','a','q','t','d','w','c','z','x','v','g','R',
 vowel_Korean=['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅔ','ㅐ','ㅖ','ㅒ','ㅘ','ㅙ','ㅚ','ㅞ','ㅝ','ㅟ','ㅢ']
 vowel_Alphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O','hk','ho','hl','np','nj','nl','ml']
 
-search=input('입력:')
-finds=list(search)
-finds=list(jamo_split(finds))
+def From_Hangul_To_Alphabet(list):
+    finds=jamo_split(list)
+    
+    '''
+    자음 바꾸기
+    '''
+    for i in range(len(finds)):
+        for k in range(len(consonant_Korean)):
+           if finds[i]==consonant_Korean[k]:
+                finds[i] = consonant_Alphabet[k]
+                #search=search.replace(search[i],consonant_Alphabet[k])
+                pass
 
+    '''
+    모음 바꾸기 
+    '''
+    for i in range(len(finds)):
+        for k in range(len(vowel_Korean)):
+           if finds[i]==vowel_Korean[k]:
+                finds[i] = vowel_Alphabet[k]
+                #search=search.replace(search[i],vowel_Alphabet[k])
+                pass
 
+    '''
+    Delete Underbar
+    '''
 
-'''
-자음 바꾸기
-'''
-for i in range(len(finds)):
-    for k in range(len(consonant_Korean)):
-       if finds[i]==consonant_Korean[k]:
-            finds[i] = consonant_Alphabet[k]
-            #search=search.replace(search[i],consonant_Alphabet[k])
+    for i in finds :
+        if i == '_' :
+            finds.remove('_')
             pass
 
-'''
-모음 바꾸기 
-'''
-for i in range(len(finds)):
-    for k in range(len(vowel_Korean)):
-       if finds[i]==vowel_Korean[k]:
-            finds[i] = vowel_Alphabet[k]
-            #search=search.replace(search[i],vowel_Alphabet[k])
-            pass
-
-'''
-Delete Underbar
-'''
-
-for i in finds :
-    if i == '_' :
-        finds.remove('_')
-        pass
-
-'''
-Print
-'''
-print(jamo_combine(finds))
+    '''
+    Print
+    '''
+    print(jamo_combine(finds))
 
 
 

@@ -1,4 +1,7 @@
 from JamoSplit import jamo_split, jamo_combine
+from inspect_search import inspect_search_function
+from search_English import From_Hangul_To_Alphabet
+import sys
 
 """
 영어에서 한글로 바꾸기
@@ -77,27 +80,15 @@ print(search)
 한글인지 아닌지?
 '''
 
-str_consonant_Alphabet = str(consonant_Alphabet)
-str_vowel_Alphabet = str(vowel_Alphabet)
 
-if len(search) > 6:
-    for i in range(0,6,1):
-        if str_consonant_Alphabet.find(search[i]) != -1 and str_consonant_Alphabet.find(search[i+1]) != -1:
-            print("영어로 검색합니다.")
-            break
-        elif str_vowel_Alphabet.find(search[i]) != -1 and str_vowel_Alphabet.find(search[i+1]) != -1:
-            print("영어로 검색합니다.")
-            break
-else :
-    for i in range(0,len(search)-1,1):
-        if str_consonant_Alphabet.find(search[i]) != -1 and str_consonant_Alphabet.find(search[i+1]) != -1:
-            print("영어로 검색합니다.")
-            break
-        elif str_vowel_Alphabet.find(search[i]) != -1 and str_vowel_Alphabet.find(search[i+1]) != -1:
-            print("영어로 검색합니다.")
-            break
+x=inspect_search_function(search)
 
-          
+
+if x==0:
+    From_Hangul_To_Alphabet(search)
+    sys.exit()
+
+
 
 '''
 
