@@ -37,8 +37,18 @@ for i in range(len(finds)):
             #search=search.replace(search[i],vowel_Alphabet[k])
             pass
 
+'''
+Delete Underbar
+'''
 
+for i in range(len(finds)) :
+    if finds[i] == '_' :
+        finds[i] = ''
+        pass
 
+'''
+Print
+'''
 print(jamo_combine(finds))
 
 
