@@ -1,16 +1,10 @@
 from JamoSplit import jamo_split, jamo_combine
+from inspect_search import consonant_Alphabet, consonant_Korean, vowel_Alphabet, vowel_Korean
 
 
 """
 한글에서 영어로 바꾸기
 """
-
-
-
-consonant_Korean = ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㄲ','ㄸ','ㅉ','ㅃ','ㅆ','ㄳ','ㄵ','ㄶ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅄ']
-consonant_Alphabet=['r','s','e','f','a','q','t','d','w','c','z','x','v','g','R','E','W','Q','T','rt','sw','sg','fr','fa','fq','ft','fx','fv','fg','qt']
-vowel_Korean=['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅔ','ㅐ','ㅖ','ㅒ','ㅘ','ㅙ','ㅚ','ㅞ','ㅝ','ㅟ','ㅢ']
-vowel_Alphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O','hk','ho','hl','np','nj','nl','ml']
 
 def From_Hangul_To_Alphabet(list):
     finds=jamo_split(list)
