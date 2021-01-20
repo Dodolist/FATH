@@ -4,26 +4,25 @@ vowel_Korean=['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅔ',
 vowel_Alphabet=['k','i','j','u','h','y','n','b','m','l','p','o','P','O','hk','ho','hl','np','nj','nl','ml']
 
 
-
-
 def inspect_search_function(list):
     
     str_consonant_Alphabet = str(consonant_Alphabet)
     str_vowel_Alphabet = str(vowel_Alphabet)
 
-    if len(list) > 6:
-        for i in range(0,6,1):
-            if str_consonant_Alphabet.find(list[i]) != -1 and str_consonant_Alphabet.find(list[i+1]) != -1:
-                print("영어로 검색합니다.")
-                return 0
-            elif str_vowel_Alphabet.find(list[i]) != -1 and str_vowel_Alphabet.find(list[i+1]) != -1:
-                print("영어로 검색합니다.")
-                return 0
+
+    if len(list) == 1 or len(list) == 0:
+        return 0
+
     else :
+        if str_vowel_Alphabet.find(list[0]) != -1 :
+            #print("영어로 검색합니다.")
+            return 0
+        elif str_consonant_Alphabet.find(list[0]) != -1 and str_consonant_Alphabet.find(list[1]) != -1:
+            #print("영어로 검색합니다.")
+            return 0
         for i in range(0,len(list)-1,1):
-            if str_consonant_Alphabet.find(list[i]) != -1 and str_consonant_Alphabet.find(list[i+1]) != -1:
-                print("영어로 검색합니다.")
+            if  (list[i] != ' ' and list[i+1] != ' ') and str_vowel_Alphabet.find(list[i]) != -1 and str_vowel_Alphabet.find(list[i+1]) != -1:
+                #print("영어로 검색합니다.")
                 return 0
-            elif str_vowel_Alphabet.find(list[i]) != -1 and str_vowel_Alphabet.find(list[i+1]) != -1:
-                print("영어로 검색합니다.")
-                return 0
+            
+    return 1
